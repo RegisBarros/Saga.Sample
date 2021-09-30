@@ -1,29 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using EasyNetQ.AutoSubscribe;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Saga.Sample.PaymentService
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly AutoSubscriber _autoSubscriber;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(AutoSubscriber autoSubscriber)
         {
-            _logger = logger;
+            _autoSubscriber = autoSubscriber;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            await _autoSubscriber.SubscribeAsync(new Assembly[] { Assembly.GetExecutingAssembly() }, stoppingToken);
         }
     }
 }
