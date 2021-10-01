@@ -1,5 +1,7 @@
-﻿namespace Saga.Sample.Shared.Contracts
+﻿using EasyNetQ;
+namespace Saga.Sample.Shared.Contracts
 {
+    [Queue("OrderCreatedEvent", ExchangeName = "OrderCreated")]
     public class OrderCreatedEvent
     {
         public int UserId { get; set; }

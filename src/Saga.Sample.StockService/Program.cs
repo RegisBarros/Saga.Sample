@@ -33,6 +33,7 @@ namespace Saga.Sample.StockService
                     });
                     
                     services.AddScoped<OrderCreatedEventConsumer>();
+                    services.AddScoped<PaymentRejectedEventConsumer>();
                     
                     services.AddHostedService<Worker>();
                 });

@@ -43,7 +43,7 @@ namespace Saga.Sample.PaymentService.Consumers
                     Reason = isPaymentCompleted.Item2
                 });
 
-                _logger.LogWarning("Payment Rejected at: {time}", DateTimeOffset.Now);
+                _logger.LogCritical("Payment Rejected at: {time}", DateTimeOffset.Now);
             }
         }
     }

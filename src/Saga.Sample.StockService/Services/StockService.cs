@@ -4,7 +4,7 @@ namespace Saga.Sample.StockService.Services
 {
     public class StockService : IStockService
     {
-        public Task<bool> ReleaseStock(int orderId)
+        public Task<bool> ReleaseStocks(int orderId)
         {
             return Task.FromResult(true);
         }
